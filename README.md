@@ -1,9 +1,9 @@
-# CForth
+# CForth - v0.1
 **cforth** is like forth programming language but in c#
 
-**cforth** compiles your program into fasm assembly then compiles that assembly and link it to current platfrom
+**cforth** compiles its code to platform fasm assembly then compiles that assembly and generating the final executable
 
-### Run
+### Compile
 currently forth has two modes one for stack based code simlar to forth 
 ```
 CForth examples/stack.cf -s -o build/out 
@@ -12,7 +12,10 @@ and one for c like syntax language
 ```
 CForth examples/test.cf -o build/out 
 ```
-
+to run the porgram after compilation finished add -r
+```
+CForth examples/test.cf -r -o build/out 
+```
 ### Example
 #### Forth like synatx
 ```
@@ -46,5 +49,26 @@ else
 }
 ```
 
+### TODO
+**Version 0.1**
+- [x] Compile unix assembly code
+- [x] Print integers to standard output
+- [x] If-else statement
+
+**Version 0.2**
+- [ ] While loops
+- [ ] Strings
+
+**Version 0.2.1**
+- [ ] Functions
+- [ ] Main entry
+
+**Version 0.2.2**
+- [ ] Structs
+
+**Version 0.2.5**
+- [ ] Add support for windows native assembly
+
 ### Supported platforms
 - **Linux** amd64, x86_64
+- **Windows** x64 !! windows platform assembly code is still under development the program will generate only unix assembly & syscalls right now

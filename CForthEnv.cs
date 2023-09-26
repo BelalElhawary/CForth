@@ -11,10 +11,5 @@ namespace CForth
         public bool run;
         public string main;
         public string output;
-
-        public static CForthEnv LoadEnv()
-        {
-            return JsonSerializer.Deserialize<CForthEnv>(File.ReadAllText(".CForth"));
-        }
     }
 }

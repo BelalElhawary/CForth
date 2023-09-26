@@ -1,0 +1,9 @@
+{
+    "main": "examples/test.cf",
+    "output": "build/out",
+    "assembly": false,
+    "logging": false,
+    "stack": false,
+    "time": false,
+    "run": true
+}

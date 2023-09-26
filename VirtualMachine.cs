@@ -5,10 +5,12 @@ namespace CForth
 {
     public class VirtualMachine
     {
-        StreamWriter writer;
-        CForthEnv env = new CForthEnv();
-        int exitCode;
-        public void Log(object msg) { if (env.logging) Console.Write(msg); }
+        internal StreamWriter writer;
+        internal CForthEnv env;
+        internal int exitCode;
+
+        internal void Log(object msg) { if (env.logging) Console.Write(msg); }
+        internal void Error(object msg) => Console.Write(msg);
 
         public VirtualMachine(CForthEnv env)
         {
@@ -18,17 +20,22 @@ namespace CForth
 
         public void Compile()
         {
-            Scanner scanner = new Scanner(File.ReadAllText(env.main));
-            var tokens = scanner.scanTokens();
-            Parser parser = new Parser(tokens);
             writer = new StreamWriter(env.output + ".asm");
-            Compiler compiler = new Compiler(writer);
-            compiler.compile(parser.parse());
+            Log("[Info] Compile CForth code to assembly\n");
+            InnerCompile();
+            Log($"[Info] CForth program compiled successfuly\n");
+            Log("[Info] Compile and link assembly code\n");
             Close();
 
             Process process;
 
-            process = Process.Start(new ProcessStartInfo() { FileName = "fasm", Arguments = $"{env.output}.asm {env.output}", RedirectStandardError = !env.assembly, RedirectStandardOutput = !env.assembly });
+            process = Process.Start(new ProcessStartInfo()
+            {
+                FileName = "fasm",
+                Arguments = $"{env.output}.asm {env.output}",
+                RedirectStandardError = !env.assembly,
+                RedirectStandardOutput = !env.assembly
+            });
             process.WaitForExit();
             exitCode = process.ExitCode;
 
@@ -42,9 +49,11 @@ namespace CForth
             }
             else
             {
-                Console.Write($"[Error] Failed to compile assembly code \n");
+                Error($"[Error] Failed to compile assembly code \n");
             }
         }
+
+        internal virtual void InnerCompile() { }
 
         public void Run()
         {
@@ -70,7 +79,7 @@ namespace CForth
             }
             else
             {
-                Console.Write($"[Error] No build to run! please compile program first\n");
+                Error($"[Error] No build to run! please compile program first\n");
             }
         }
 
@@ -86,7 +95,7 @@ namespace CForth
             }
             else
             {
-                Console.Write($"[Error] No build to run! please compile program first\n");
+                Error($"[Error] No build to run! please compile program first\n");
             }
         }
 
