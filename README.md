@@ -6,7 +6,7 @@
 ### Compile
 currently forth has two modes one for stack based code simlar to forth 
 
-`CForth examples/stack.cf -s -o build/out`
+`CForth examples/stack.cf -s`
 
 and one for c like syntax language
 
