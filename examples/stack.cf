@@ -1,0 +1,7 @@
+10 10 == if
+    0 if
+        100 print
+    else
+        200 print
+else
+    200 print
