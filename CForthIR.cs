@@ -46,7 +46,7 @@ namespace CForth
                     case "-":
                         program.Add((INST.MINUS, 0));
                         break;
-                    case ".":
+                    case "print":
                         program.Add((INST.DUMP, 0));
                         break;
                     case "==":
