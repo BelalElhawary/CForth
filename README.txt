@@ -6,11 +6,11 @@ cforth is first compiles your program into fasm assembly then compiles that asse
 # Run
 currently forth has two modes one for stack based code simlar to forth 
 ```
-porth examples/stack.cf -s -o build/out 
+CForth examples/stack.cf -s -o build/out 
 ```
 and one for c like syntax language
 ```
-porth examples/test.cf -o build/out 
+CForth examples/test.cf -o build/out 
 ```
 
 # Supported platforms

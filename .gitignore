@@ -1,3 +1,6 @@
 test/
 obj/
 bin/
+build/
+out
+out.asm
