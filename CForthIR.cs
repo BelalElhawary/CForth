@@ -21,15 +21,14 @@ namespace CForth
         StreamWriter writer;
         Stopwatch stopwatch = new Stopwatch();
         List<(INST, object)> program;
-        public CForthEnv env = new CForthEnv();
+        CForthEnv env = new CForthEnv();
         int exitCode;
         public void Log(object msg) { if (env.logging) Console.Write(msg); }
 
-        public CForthIR(string input, string output)
+        public CForthIR(CForthEnv env)
         {
+            this.env = env;
             Log("[Info] Init CForth vm\n");
-            env.output = output;
-            env.main = input;
         }
 
         public void Parse()
@@ -145,7 +144,7 @@ namespace CForth
                         writer.Write(Common.ELSE(inst.Item2, i + 1));
                         break;
                     case INST.END:
-                        writer.Write($"addr_{i}:");
+                        writer.Write($"addr_{i + 1}:");
                         break;
                 }
             }
@@ -170,7 +169,8 @@ namespace CForth
                 process.WaitForExit();
                 exitCode = process.ExitCode;
                 Log($"[Info] Assembly code compiled\n");
-                Run();
+                if (env.run)
+                    Run();
             }
             else
             {

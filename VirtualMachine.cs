@@ -6,15 +6,14 @@ namespace CForth
     public class VirtualMachine
     {
         StreamWriter writer;
-        public CForthEnv env = new CForthEnv();
+        CForthEnv env = new CForthEnv();
         int exitCode;
         public void Log(object msg) { if (env.logging) Console.Write(msg); }
 
-        public VirtualMachine(string input, string output)
+        public VirtualMachine(CForthEnv env)
         {
+            this.env = env;
             Log("[Info] Init CForth vm\n");
-            env.output = output;
-            env.main = input;
         }
 
         public void Compile()
@@ -38,7 +37,8 @@ namespace CForth
                 process = Process.Start("chmod", $"+x {env.output}");
                 process.WaitForExit();
                 exitCode = process.ExitCode;
-                Run();
+                if (env.run)
+                    Run();
             }
             else
             {

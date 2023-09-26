@@ -7,6 +7,8 @@ namespace CForth
         public bool time;
         public bool logging;
         public bool assembly;
+        public bool stack;
+        public bool run;
         public string main;
         public string output;
 
