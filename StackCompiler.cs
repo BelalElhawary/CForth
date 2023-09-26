@@ -130,7 +130,7 @@ namespace CForth
                         writer.Write(Common.ELSE(inst.Item2, i + 1));
                         break;
                     case INST.END:
-                        writer.Write($"addr_{i + 1}:");
+                        writer.Write($"addr_{i}:");
                         break;
                 }
             }

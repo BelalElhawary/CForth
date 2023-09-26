@@ -5,17 +5,16 @@
 
 ### Compile
 currently forth has two modes one for stack based code simlar to forth 
-```
-CForth examples/stack.cf -s -o build/out 
-```
+
+`CForth examples/stack.cf -s -o build/out`
+
 and one for c like syntax language
-```
-CForth examples/test.cf -o build/out 
-```
+
+`CForth examples/test.cf`
+
 to run the porgram after compilation finished add -r
-```
-CForth examples/test.cf -r -o build/out 
-```
+
+`CForth examples/test.cf -r`
 ### Example
 #### Forth like synatx
 ```
@@ -24,8 +23,10 @@ CForth examples/test.cf -r -o build/out
         100 print
     else
         300 print
+    end
 else
     200 print
+end
 ```
 output '300'
 #### C like synatx
